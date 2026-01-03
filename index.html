@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mike Muñoz | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <h2>Mike</h2>
+
+  <!-- MODE TOGGLE -->
+  <div class="pill-tabs">
+    <button class="pill-btn active" data-mode="dev">Developer</button>
+    <button class="pill-btn" data-mode="design">Designer</button>
+    <div class="pill-indicator"></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-editorial">
+  <div class="hero-left">
+    <h1>
+      Hello,<br />
+      I’m <span>Mike Muñoz</span>
+    </h1>
+    <p>Developer & Designer</p>
+  </div>
+
+  <div class="hero-right">
+    <img src="profile.jpg" alt="Mike Muñoz" />
+  </div>
+</section>
+
+<!-- SECTION TABS -->
+<div class="section-tabs">
+  <button class="section-tab active" data-section="skills">Skills</button>
+  <button class="section-tab" data-section="portfolio">Portfolio</button>
+</div>
+
+<!-- CONTENT -->
+<main>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section-content active">
+    <div class="stack-grid">
+      <div class="stack-card frontend">
+        <h4>Frontend</h4>
+        <ul>
+          <li>React / Vite</li>
+          <li>HTML, CSS, JavaScript</li>
+          <li>Tailwind CSS</li>
+          <li>Responsive UI</li>
+        </ul>
+      </div>
+
+      <div class="stack-card backend">
+        <h4>Backend</h4>
+        <ul>
+          <li>Node.js / Express</li>
+          <li>Python / Flask</li>
+          <li>REST APIs</li>
+          <li>MongoDB / Firebase</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section-content">
+    <div class="card-grid">
+      <div class="card">
+        <h4>Photon</h4>
+        <p>AI OCR code assistant</p>
+      </div>
+
+      <div class="card">
+        <h4>Michelin PH Map</h4>
+        <p>Interactive food map</p>
+      </div>
+
+      <div class="card">
+        <h4>Word Jester</h4>
+        <p>Multiplayer word game</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2025 Mike Muñoz
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
