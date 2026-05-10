@@ -143,10 +143,34 @@ body::before {
   transition: transform 0.33s cubic-bezier(0.22, 1, 0.36, 1), width 0.33s cubic-bezier(0.22, 1, 0.36, 1), background 0.33s ease;
   z-index: 1;
   pointer-events: none;
+  box-shadow: 0 0 16px rgba(0, 122, 120, 0.3);
+  animation: indicatorPulse 2s ease-in-out infinite;
+}
+
+@keyframes indicatorPulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(0, 122, 120, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(0, 122, 120, 0.5);
+  }
 }
 
 .pill-tabs.design-active .pill-indicator {
   background: linear-gradient(130deg, var(--accent-b), #ef8d58);
+}
+
+.pill-tabs.design-active .pill-indicator {
+  animation: indicatorPulseDesign 2s ease-in-out infinite;
+}
+
+@keyframes indicatorPulseDesign {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(229, 95, 43, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(229, 95, 43, 0.5);
+  }
 }
 
 .mode-toggle-hint {
@@ -344,15 +368,64 @@ body::before {
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  padding: 8px 10px;
+  padding: 8px 10px 8px 14px;
   border-radius: 999px;
   background: linear-gradient(135deg, #14a800, #0f8b00);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  animation: subtlePulse 2s ease-in-out infinite;
+}
+
+.callout-btn::after {
+  content: "→";
+  display: inline-block;
+  font-size: 0.85em;
+  transition: transform 0.3s ease;
+  animation: arrowBounce 1.6s ease-in-out infinite;
 }
 
 .callout-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 8px 16px rgba(20, 168, 0, 0.25);
+}
+
+.callout-btn:hover::after {
+  animation: arrowBounceHover 0.6s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes arrowBounceHover {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    filter: drop-shadow(0 4px 12px rgba(20, 168, 0, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 6px 20px rgba(20, 168, 0, 0.35));
+  }
 }
 
 .portrait-card {
