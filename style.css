@@ -328,7 +328,7 @@ body::before {
   top: -24px;
   left: -16px;
   z-index: 4;
-  max-width: 290px;
+  max-width: 350px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -368,20 +368,20 @@ body::before {
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  padding: 8px 10px 8px 14px;
+  padding: 8px 12px;
   border-radius: 999px;
   background: linear-gradient(135deg, #14a800, #0f8b00);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   animation: subtlePulse 2s ease-in-out infinite;
 }
 
 .callout-btn::after {
   content: "→";
   display: inline-block;
-  font-size: 0.85em;
+  font-size: 0.9em;
   transition: transform 0.3s ease;
   animation: arrowBounce 1.6s ease-in-out infinite;
 }
