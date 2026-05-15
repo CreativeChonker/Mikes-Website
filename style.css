@@ -620,6 +620,40 @@ main {
   gap: 8px;
 }
 
+.stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  color: #1a1a1a;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 7px 14px 7px 10px;
+  border-radius: 100px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-pill:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+}
+
+.tech-pill img,
+.tech-pill-svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 .stack-card h4 {
   font-family: "Fraunces", serif;
   font-size: 1.4rem;
