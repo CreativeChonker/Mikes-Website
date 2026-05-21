@@ -23,14 +23,8 @@
     </span>
   </h2>
 
-  <!-- MODE TOGGLE -->
-  <div class="mode-toggle-wrap">
-    <div class="pill-tabs">
-      <button class="pill-btn active" data-mode="dev">Developer</button>
-      <button class="pill-btn" data-mode="design">Designer</button>
-      <div class="pill-indicator" id="pillIndicator"></div>
-    </div>
-    <p class="mode-toggle-hint">Switch portfolio mode</p>
+  <div class="nav-cta">
+    <span class="availability-pill">Available for freelance &amp; full-time work</span>
   </div>
 </nav>
 
@@ -38,8 +32,15 @@
 <section class="hero-editorial">
   <div class="hero-left">
     <p class="eyebrow" id="heroEyebrow">Product-focused engineer and visual builder</p>
-    <h1 id="heroTitle">I design clear experiences and build fast, reliable products.</h1>
-    <p class="hero-copy" id="heroCopy">I am Mike, a 23-year-old developer from the Philippines and a Computer Science graduate. I help teams ship polished web apps, from architecture and APIs to the final animation pass.</p>
+    <h1 id="heroTitle">I build conversion-focused websites and web apps that are fast, reliable, and production-ready.</h1>
+    <p class="hero-copy" id="heroCopy">I am Mike, a developer from the Philippines and a Computer Science graduate. I help clients launch polished products end-to-end: planning, frontend, backend, and final quality checks.</p>
+    <div class="cta-row">
+      <a href="#portfolio" class="cta primary">View My Work</a>
+      <a href="Mike%20Munoz%20Resume.pdf" class="cta ghost" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download Resume
+      </a>
+    </div>
     <div class="hero-metrics">
       <div>
         <strong id="metricOneValue">4+</strong>
@@ -54,7 +55,32 @@
         <span id="metricThreeLabel">Computer Science background</span>
       </div>
     </div>
-    <div class="upwork-proof" aria-label="Upwork achievements">
+  </div>
+
+  <div class="hero-right">
+    <div class="portrait-card">
+      <img src="assets/self.jpg" alt="Mike portrait" class="portrait-image" id="heroPortrait" />
+      <div class="orbit orbit-a"></div>
+      <div class="orbit orbit-b"></div>
+    </div>
+    <div class="hero-contact-card" aria-label="Contact links">
+      <span class="hero-contact-label">Reach me on</span>
+      <div class="hero-contact-actions">
+        <a href="https://www.linkedin.com/in/mike-erickson-mu%C3%B1oz-6375aa391" target="_blank" rel="noopener noreferrer" class="hero-contact-btn hero-contact-btn--linkedin">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.13 1.44-2.13 2.93v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/CreativeChonker" target="_blank" rel="noopener" class="hero-contact-btn hero-contact-btn--solid">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mikemnz431@gmail.com" target="_blank" rel="noopener noreferrer" class="hero-contact-btn hero-contact-btn--outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+          Email Me
+        </a>
+      </div>
+    </div>
+    <div class="upwork-proof hero-proof" aria-label="Upwork achievements">
       <div class="proof-badge">
         <span class="badge-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
@@ -73,45 +99,39 @@
       </div>
     </div>
   </div>
-
-  <div class="hero-right">
-    <div class="portrait-callout" role="note" aria-label="Upwork hire callout">
-      <p id="calloutText">You can hire me on Upwork too.</p>
-      <a href="https://www.upwork.com/freelancers/~017533e44ffdc8a45e?mp_source=share" target="_blank" rel="noreferrer" class="callout-btn">Hire on Upwork</a>
-    </div>
-    <div class="portrait-card">
-      <img src="assets/self.jpg" alt="Mike portrait" class="portrait-image" id="heroPortrait" />
-      <div class="orbit orbit-a"></div>
-      <div class="orbit orbit-b"></div>
-    </div>
-    <div class="hero-contact-card" aria-label="Contact links">
-      <span class="hero-contact-label">Reach me on</span>
-      <div class="hero-contact-actions">
-        <a href="https://github.com/CreativeChonker" target="_blank" rel="noopener" class="hero-contact-btn hero-contact-btn--solid">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
-        </a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mikemnz431@gmail.com" target="_blank" rel="noopener noreferrer" class="hero-contact-btn hero-contact-btn--outline">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
-          Email Me
-        </a>
-      </div>
-    </div>
-  </div>
 </section>
-
-<!-- SECTION TABS -->
-<div class="section-tabs">
-  <button class="section-tab active" data-section="skills">Skills</button>
-  <button class="section-tab" data-section="portfolio">Portfolio</button>
-  <button class="section-tab is-hidden" data-section="digital-art">Digital Art</button>
-</div>
 
 <!-- CONTENT -->
 <main>
 
+  <section class="hire-strip" aria-label="Hiring value proposition">
+    <div class="hire-strip-main">
+      <p class="section-kicker">Why clients hire me</p>
+      <h3>I focus on outcomes, communication, and clean execution.</h3>
+      <p>I keep projects moving with clear updates, practical decisions, and production-quality code that is easy to maintain.</p>
+    </div>
+    <div class="hire-points" role="list" aria-label="Client benefits">
+      <div class="hire-point" role="listitem">
+        <strong>Fast Turnaround</strong>
+        <span>Clear milestones and steady weekly delivery.</span>
+      </div>
+      <div class="hire-point" role="listitem">
+        <strong>Business-Focused Builds</strong>
+        <span>Websites designed to convert and support real goals.</span>
+      </div>
+      <div class="hire-point" role="listitem">
+        <strong>Reliable Communication</strong>
+        <span>Organized updates and responsive collaboration.</span>
+      </div>
+    </div>
+  </section>
+
   <!-- SKILLS -->
-  <section id="skills" class="section-content active">
+  <section id="skills" class="content-section">
+    <div class="section-intro">
+      <p class="section-kicker">Technical strengths</p>
+      <h3>Core skills I use to ship quality products</h3>
+    </div>
     <div class="stack-grid">
       <div class="stack-card frontend">
         <h4>Frontend</h4>
@@ -152,7 +172,11 @@
   </section>
 
   <!-- PORTFOLIO -->
-  <section id="portfolio" class="section-content">
+  <section id="portfolio" class="content-section">
+    <div class="section-intro">
+      <p class="section-kicker">Selected work</p>
+      <h3>Sites I've built</h3>
+    </div>
     <div class="card-grid">
 
       <article class="project-card project-card--featured" role="button" tabindex="0"
@@ -330,78 +354,16 @@
     </div>
   </section>
 
-  <!-- PIXEL ART -->
-  <section id="pixel-art" class="section-content">
-    <div class="pixel-gallery">
-
-      <!-- Row 1 — Characters -->
-      <div class="pixel-item"><img src="assets/pixel/pixel-char-idle.gif"  alt="Character Idle"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-char-jump.gif"  alt="Character Jump"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-char-run.gif"   alt="Character Run"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-char-death.gif" alt="Character Death"></div>
-
-      <!-- Row 2 — Backgrounds -->
-      <div class="pixel-item"><img src="assets/pixel/pixel-bg-84.png"  alt="Background 84"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-bg-103.png" alt="Background 103"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-bg-106.png" alt="Background 106"></div>
-      <div class="pixel-item"><img src="assets/pixel/pixel-bg-107.png" alt="Background 107"></div>
-
-      <!-- Row 3 — Maelle + Study (each 2 cols) -->
-      <div class="pixel-item span-2"><img src="assets/pixel/pixel-maelle.png" alt="Maelle"></div>
-      <div class="pixel-item span-2"><img src="assets/pixel/pixel-study.png"  alt="Study"></div>
-
-      <!-- Row 4 — Landscape pair (each 2 cols) -->
-      <div class="pixel-item span-2 wide"><img src="assets/pixel/pixel-sage-bg.gif"    alt="Sage Background"></div>
-      <div class="pixel-item span-2 wide"><img src="assets/pixel/pixel-card-game.png"  alt="Card Game"></div>
-
-      <!-- Row 5 — Full-width hero piece -->
-      <div class="pixel-item span-4"><img src="assets/pixel/pixel-happybday.png" alt="Happy Birthday"></div>
-
-    </div>
-  </section>
-
-  <!-- TRADITIONAL ART -->
-  <section id="traditional-art" class="section-content">
-    <div class="pixel-gallery">
-
-      <!-- Row 1 — color2 + color3 -->
-      <div class="pixel-item span-2"><img src="assets/trad/color2.jpg" alt="Color Study 2"></div>
-      <div class="pixel-item span-2"><img src="assets/trad/color3.jpg" alt="Color Study 3"></div>
-
-      <!-- Row 2 — color1 + color4 -->
-      <div class="pixel-item span-2"><img src="assets/trad/color1.jpg" alt="Color Study 1"></div>
-      <div class="pixel-item span-2"><img src="assets/trad/color4.jpg" alt="Color Study 4"></div>
-
-      <!-- Row 3 — charcoals -->
-      <div class="pixel-item span-2"><img src="assets/trad/charcoal1.jpg" alt="Charcoal 1"></div>
-      <div class="pixel-item span-2"><img src="assets/trad/charcoal2.jpg" alt="Charcoal 2"></div>
-
-    </div>
-  </section>
-
-  <!-- DIGITAL ART -->
-  <section id="digital-art" class="section-content">
-    <div class="pixel-gallery digital-gallery">
-      <div class="pixel-item"><img src="assets/digital/1.jpg" alt="Digital artwork 1"></div>
-      <div class="pixel-item"><img src="assets/digital/2.jpg" alt="Digital artwork 2"></div>
-      <div class="pixel-item"><img src="assets/digital/3.jpg" alt="Digital artwork 3"></div>
-      <div class="pixel-item"><img src="assets/digital/4.jpg" alt="Digital artwork 4"></div>
-
-      <div class="pixel-item"><img src="assets/digital/5.jpg" alt="Digital artwork 5"></div>
-      <div class="pixel-item"><img src="assets/digital/6.jpg" alt="Digital artwork 6"></div>
-      <div class="pixel-item"><img src="assets/digital/7.jpg" alt="Digital artwork 7"></div>
-      <div class="pixel-item"><img src="assets/digital/8.jpg" alt="Digital artwork 8"></div>
-
-      <div class="pixel-item span-4"><img src="assets/digital/New3.png" alt="Digital artwork New3"></div>
-    </div>
-  </section>
-
 </main>
 
 <footer>
   <div class="footer-inner">
     <span>Built with code, taste, gym, and too much coffee.</span>
     <div class="footer-links">
+      <a href="https://www.linkedin.com/in/mike-erickson-mu%C3%B1oz-6375aa391" target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn--linkedin">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.13 1.44-2.13 2.93v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+        LinkedIn
+      </a>
       <a href="https://github.com/CreativeChonker" target="_blank" rel="noopener" class="footer-btn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
         GitHub
@@ -453,14 +415,6 @@
     </div>
   </div>
 </aside>
-
-<!-- Lightbox -->
-<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button id="lightboxClose" aria-label="Close">
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-  </button>
-  <img id="lightboxImg" src="" alt="">
-</div>
 
 <script src="script.js"></script>
 </body>

@@ -1,94 +1,5 @@
-// MODE TOGGLE (Developer / Designer)
-const modeBtns = document.querySelectorAll(".pill-btn");
-const pillContainer = document.querySelector(".pill-tabs");
-const body = document.body;
 const rotatorTrack = document.querySelector("#rotatorTrack");
-const heroEyebrow = document.querySelector("#heroEyebrow");
-const heroTitle = document.querySelector("#heroTitle");
-const heroCopy = document.querySelector("#heroCopy");
-const calloutText = document.querySelector("#calloutText");
-const heroPortrait = document.querySelector("#heroPortrait");
-const metricOneValue = document.querySelector("#metricOneValue");
-const metricOneLabel = document.querySelector("#metricOneLabel");
-const metricTwoValue = document.querySelector("#metricTwoValue");
-const metricTwoLabel = document.querySelector("#metricTwoLabel");
-const metricThreeValue = document.querySelector("#metricThreeValue");
-const metricThreeLabel = document.querySelector("#metricThreeLabel");
-const sectionTabs = Array.from(document.querySelectorAll(".section-tab"));
-const sections = Array.from(document.querySelectorAll(".section-content"));
-
-const tabSets = {
-  dev: [
-    { label: "Skills", section: "skills" },
-    { label: "Portfolio", section: "portfolio" }
-  ],
-  design: [
-    { label: "Pixel Art", section: "pixel-art" },
-    { label: "Traditional Art", section: "traditional-art" },
-    { label: "Digital Art", section: "digital-art" }
-  ]
-};
-
-const modeContent = {
-  dev: {
-    eyebrow: "Product-focused engineer and visual builder",
-    title: "I design clear experiences and build fast, reliable products.",
-    copy: "I am Mike, a 23-year-old developer from the Philippines and a Computer Science graduate. I help teams ship polished web apps, from architecture and APIs to the final animation pass.",
-    callout: "You can hire me on Upwork too.",
-    photo: "assets/self.jpg",
-    metrics: [
-      { value: "4+", label: "Years building products" },
-      { value: "Quality", label: "Selective web projects shipped" },
-      { value: "CS Graduate", label: "Computer Science background" }
-    ]
-  },
-  design: {
-    eyebrow: "Creative problem-solver and visual storyteller",
-    title: "I craft visual experiences that feel clean, modern, and memorable.",
-    copy: "As an artist, I work across pixel art, traditional drawing, and digital illustration. I focus on style consistency, strong composition, and visual storytelling that feels original.",
-    callout: "Need strong visuals? Let's design your next project.",
-    photo: "assets/pixel/pixel-char-sheet.png",
-    metrics: [
-      { value: "Pixel Art", label: "Sprites and retro environments" },
-      { value: "Traditional", label: "Sketch and ink foundations" },
-      { value: "Digital", label: "Illustration and visual storytelling" }
-    ]
-  }
-};
-
-const rotatingWords = ["creates", "codes", "draws", "builds", "ships"];
-
-function activateSection(sectionId) {
-  sections.forEach(sec => {
-    sec.classList.toggle("active", sec.id === sectionId);
-  });
-
-  sectionTabs.forEach(tab => {
-    tab.classList.toggle("active", tab.dataset.section === sectionId && !tab.classList.contains("is-hidden"));
-  });
-}
-
-function configureTabs(mode) {
-  const activeSet = tabSets[mode === "design" ? "design" : "dev"];
-
-  sectionTabs.forEach((tab, index) => {
-    const data = activeSet[index];
-
-    if (data) {
-      tab.classList.remove("is-hidden");
-      tab.textContent = data.label;
-      tab.dataset.section = data.section;
-    } else {
-      tab.classList.add("is-hidden");
-      tab.classList.remove("active");
-      tab.dataset.section = "";
-    }
-  });
-
-  if (activeSet[0]) {
-    activateSection(activeSet[0].section);
-  }
-}
+const rotatingWords = ["codes", "builds", "ships", "scales"];
 
 if (rotatorTrack) {
   const loopWords = [...rotatingWords, rotatingWords[0]];
@@ -113,59 +24,6 @@ if (rotatorTrack) {
   }, 2000);
 }
 
-function setMode(mode) {
-  body.classList.remove("mode-dev", "mode-design");
-  body.classList.add(mode === "design" ? "mode-design" : "mode-dev");
-  configureTabs(mode);
-
-  const content = modeContent[mode === "design" ? "design" : "dev"];
-  if (!content) return;
-
-  if (heroEyebrow) heroEyebrow.textContent = content.eyebrow;
-  if (heroTitle) heroTitle.textContent = content.title;
-  if (heroCopy) heroCopy.textContent = content.copy;
-  if (calloutText) calloutText.textContent = content.callout;
-
-  if (metricOneValue) metricOneValue.textContent = content.metrics[0].value;
-  if (metricOneLabel) metricOneLabel.textContent = content.metrics[0].label;
-  if (metricTwoValue) metricTwoValue.textContent = content.metrics[1].value;
-  if (metricTwoLabel) metricTwoLabel.textContent = content.metrics[1].label;
-  if (metricThreeValue) metricThreeValue.textContent = content.metrics[2].value;
-  if (metricThreeLabel) metricThreeLabel.textContent = content.metrics[2].label;
-
-  if (heroPortrait) {
-    const testImage = new Image();
-    testImage.onload = () => {
-      heroPortrait.src = content.photo;
-      heroPortrait.classList.remove("designer-variant");
-    };
-    testImage.onerror = () => {
-      heroPortrait.src = "assets/self.jpg";
-      if (mode === "design") {
-        heroPortrait.classList.add("designer-variant");
-      } else {
-        heroPortrait.classList.remove("designer-variant");
-      }
-    };
-    testImage.src = content.photo;
-  }
-}
-
-// Pill indicator — tracks actual button position
-const pillIndicator = document.querySelector("#pillIndicator");
-
-function updateIndicator(activeBtn) {
-  if (!pillIndicator || !activeBtn) return;
-  const container = activeBtn.closest(".pill-tabs");
-  const containerLeft = container.getBoundingClientRect().left;
-  const btnRect = activeBtn.getBoundingClientRect();
-  pillIndicator.style.width = btnRect.width + "px";
-  pillIndicator.style.transform = `translateX(${btnRect.left - containerLeft - 5}px)`;
-}
-
-setMode("dev");
-updateIndicator(document.querySelector(".pill-btn.active"));
-
 // Back to top
 const backToTopBtn = document.querySelector("#backToTop");
 if (backToTopBtn) {
@@ -177,22 +35,6 @@ if (backToTopBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
-
-modeBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    modeBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    updateIndicator(btn);
-
-    if (btn.dataset.mode === "design") {
-      pillContainer.classList.add("design-active");
-      setMode("design");
-    } else {
-      pillContainer.classList.remove("design-active");
-      setMode("dev");
-    }
-  });
-});
 
 // Project Drawer
 const drawer        = document.querySelector("#projectDrawer");
@@ -242,7 +84,6 @@ function openDrawer(card) {
       img.src = src.trim();
       img.alt = `${title} screenshot ${i + 1}`;
       slide.appendChild(img);
-      slide.addEventListener("click", () => openLightbox(img.src, title));
       track.appendChild(slide);
     });
 
@@ -323,79 +164,10 @@ if (drawerOverlay) drawerOverlay.addEventListener("click", closeDrawer);
 drawer.addEventListener("click", e => { if (e.target === drawer) closeDrawer(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
-// 3D tilt + shine on gallery cards
-document.querySelectorAll(".pixel-item").forEach(card => {
-  const MAX_TILT = 12;
-
-  card.addEventListener("mouseenter", () => {
-    card.style.transition = "box-shadow 0.18s ease";
-    card.style.boxShadow = "0 20px 48px rgba(21, 32, 33, 0.2)";
-  });
-
-  card.addEventListener("mousemove", e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top)  / rect.height;
-    const rotY =  (x - 0.5) * MAX_TILT;
-    const rotX = -(y - 0.5) * MAX_TILT;
-    card.style.transition = "box-shadow 0.18s ease";
-    card.style.transform = `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.03,1.03,1.03)`;
-    card.style.setProperty("--shine-x", `${x * 100}%`);
-    card.style.setProperty("--shine-y", `${y * 100}%`);
-  });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transition = "transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease";
-    card.style.transform = "perspective(700px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
-    card.style.boxShadow = "";
-  });
-});
-
-// Lightbox
-const lightbox    = document.querySelector("#lightbox");
-const lightboxImg = document.querySelector("#lightboxImg");
-const lightboxClose = document.querySelector("#lightboxClose");
-
-function openLightbox(src, alt) {
-  lightboxImg.src = src;
-  lightboxImg.alt = alt || "";
-  lightbox.classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function closeLightbox() {
-  lightbox.classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-document.querySelectorAll(".pixel-item").forEach(img => {
-  img.addEventListener("click", () => {
-    const src = img.querySelector("img");
-    if (src) openLightbox(src.src, src.alt);
-  });
-});
-
-if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-if (lightbox) {
-  lightbox.addEventListener("click", e => {
-    if (e.target === lightbox) closeLightbox();
-  });
-}
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeLightbox();
-});
-
 // Block right-click and drag on all images
 document.addEventListener("contextmenu", e => {
   if (e.target.tagName === "IMG") e.preventDefault();
 });
 document.addEventListener("dragstart", e => {
   if (e.target.tagName === "IMG") e.preventDefault();
-});
-
-sectionTabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    if (!tab.dataset.section || tab.classList.contains("is-hidden")) return;
-    activateSection(tab.dataset.section);
-  });
 });
