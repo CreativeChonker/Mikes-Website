@@ -121,6 +121,7 @@ body::before {
 
 /* HERO */
 .hero-editorial {
+  width: min(1200px, calc(100% - 40px));
   max-width: 1200px;
   margin: 22px auto 14px;
   padding: 62px 36px;
@@ -130,13 +131,18 @@ body::before {
   gap: 30px;
   border-radius: var(--radius-xl);
   border: 1px solid var(--line);
-  background: linear-gradient(145deg, rgba(255, 251, 245, 0.95), rgba(255, 246, 236, 0.88));
+  background: linear-gradient(145deg, #fffbf5, #fff3e6);
   box-shadow: 0 24px 80px rgba(21, 32, 33, 0.14);
+  overflow: hidden;
 }
 
 .hero-left {
   display: grid;
   gap: 16px;
+}
+
+.hero-inline-photo {
+  display: none;
 }
 
 .eyebrow {
@@ -147,23 +153,34 @@ body::before {
   font-weight: 700;
 }
 
+.hero-intro {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  line-height: 1.1;
+  color: var(--accent-a);
+  font-weight: 700;
+}
+
 .hero-left h1 {
   font-family: "Fraunces", serif;
-  font-size: clamp(1.85rem, 4.8vw, 4.15rem);
-  line-height: 1.02;
-  max-width: 13ch;
+  font-size: clamp(2.8rem, 7.1vw, 6rem);
+  line-height: 0.95;
+  max-width: 16ch;
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 .hero-copy {
   color: var(--muted);
   max-width: 52ch;
   line-height: 1.6;
+  margin-bottom: 0;
 }
 
 .cta-row {
   display: flex;
   gap: 12px;
-  margin-top: 4px;
+  margin-top: -10px;
 }
 
 .cta {
@@ -299,6 +316,10 @@ body::before {
   white-space: nowrap;
 }
 
+.hero-proof--laptop {
+  display: none;
+}
+
 .hero-contact-label {
   font-size: 0.8rem;
   font-weight: 700;
@@ -359,6 +380,17 @@ body::before {
 
 .hero-contact-btn--outline:hover {
   background: #fff;
+}
+
+.hero-contact-btn--upwork {
+  background: #14a800;
+  border-color: #14a800;
+  color: #fff;
+}
+
+.hero-contact-btn--upwork:hover {
+  background: #108a00;
+  border-color: #108a00;
 }
 
 .portrait-image {
@@ -644,7 +676,7 @@ main {
 /* ── Card Grid ── */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
@@ -922,6 +954,49 @@ footer {
 .footer-btn--linkedin:hover {
   background: #0057a6;
   border-color: #0057a6;
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .hero-editorial {
+    align-items: start;
+    padding: 42px 30px 34px;
+  }
+
+  .hero-right {
+    margin-top: 0;
+  }
+
+  .hero-proof--laptop {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .hero-proof--right {
+    display: block;
+  }
+
+  .hero-proof--right .proof-badge {
+    display: none;
+  }
+
+  .hero-proof--right::before {
+    content: "100% Job Success \2022 Top Rated on Upwork";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #12313a;
+    font-size: 0.81rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+  }
 }
 
 .hero-left > * {
@@ -1225,7 +1300,7 @@ footer {
 }
 
 /* MOBILE */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .nav {
     padding: 24px 20px 10px;
   }
@@ -1239,8 +1314,74 @@ footer {
 
   .hero-editorial {
     margin: 18px 20px 12px;
-    padding: 48px 28px;
+    padding: 44px 28px;
     gap: 24px;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    display: block;
+  }
+
+  .hero-inline-photo {
+    display: block;
+    float: right;
+    width: min(34vw, 270px);
+    aspect-ratio: 4 / 5;
+    margin: 2px 0 14px 18px;
+    border-radius: 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 24%, rgba(229, 95, 43, 0.45), transparent 40%),
+      radial-gradient(circle at 82% 84%, rgba(0, 122, 120, 0.5), transparent 45%),
+      linear-gradient(160deg, #ffe6ce, #f8bfa2 42%, #d18f73 100%);
+    box-shadow: 0 18px 36px rgba(21, 32, 33, 0.16);
+  }
+
+  .hero-inline-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-left h1 {
+    max-width: 15ch;
+  }
+
+  .hero-copy {
+    margin-top: 12px;
+  }
+
+  .cta-row {
+    clear: both;
+    margin-top: 18px;
+  }
+
+  .hero-right {
+    margin-top: 8px;
+    justify-items: flex-start;
+    gap: 12px;
+  }
+
+  .portrait-card {
+    display: none;
+  }
+
+  .hero-contact-card,
+  .hero-proof {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .hero-contact-actions {
+    justify-content: flex-start;
+  }
+
+  .hero-proof {
+    flex-wrap: wrap;
   }
 
   main {
@@ -1300,11 +1441,28 @@ footer {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .hero-editorial {
     grid-template-columns: 1fr;
     text-align: left;
     padding: 36px 24px;
+  }
+
+  .hero-inline-photo {
+    display: block;
+    float: right;
+    width: min(32vw, 160px);
+    aspect-ratio: 1 / 1;
+    margin: 12px 0 12px 14px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    clip-path: circle(50%);
+    overflow: hidden;
+  }
+
+  .hero-inline-photo img {
+    transform: scale(1.28);
+    transform-origin: center 34%;
   }
 
   .hero-metrics {
@@ -1316,8 +1474,13 @@ footer {
     flex-wrap: wrap;
   }
 
+  .cta.ghost .cta-label-download {
+    display: none;
+  }
+
   .hero-right {
     margin-top: 10px;
+    justify-items: center;
   }
 
   .hero-contact-card {
@@ -1357,8 +1520,7 @@ footer {
   }
 
   #backToTop {
-    right: 20px;
-    bottom: 20px;
+    display: none !important;
   }
 }
 
@@ -1376,7 +1538,7 @@ footer {
 
   .nav-cta {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .availability-pill {
@@ -1390,6 +1552,7 @@ footer {
   }
 
   .hero-editorial {
+    width: auto;
     margin-top: 14px;
     margin-left: 16px;
     margin-right: 16px;
@@ -1398,17 +1561,74 @@ footer {
   }
 
   .hero-left h1 {
-    max-width: 9.5ch;
+    max-width: 12ch;
     font-size: clamp(1.65rem, 3.2vw, 2.2rem);
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  .hero-left {
+    display: block;
+  }
+
+  .eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .hero-inline-photo {
+    display: block;
+    float: right;
+    width: min(34vw, 140px);
+    aspect-ratio: 1 / 1;
+    margin: 10px 0 10px 12px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    clip-path: circle(50%);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 24%, rgba(229, 95, 43, 0.45), transparent 40%),
+      radial-gradient(circle at 82% 84%, rgba(0, 122, 120, 0.5), transparent 45%),
+      linear-gradient(160deg, #ffe6ce, #f8bfa2 42%, #d18f73 100%);
+    box-shadow: 0 16px 32px rgba(21, 32, 33, 0.16);
+  }
+
+  .hero-inline-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
 
   .hero-copy {
     font-size: 0.95rem;
     line-height: 1.65;
+    margin-top: 12px;
+  }
+
+  .cta-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 18px;
+    clear: none;
+  }
+
+  .cta {
+    width: auto;
+    justify-content: center;
+    white-space: nowrap;
   }
 
   .hero-metrics div {
     padding: 14px 12px;
+  }
+
+  .hero-metrics strong {
+    font-size: 1.15rem;
+  }
+
+  .hero-metrics span {
+    font-size: 0.84rem;
   }
 
   .portrait-card,
@@ -1416,13 +1636,104 @@ footer {
     width: 100%;
   }
 
+  .portrait-card {
+    display: none;
+  }
+
   .hero-contact-actions {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .hero-contact-btn {
-    flex: 1 1 calc(50% - 5px);
+    width: auto;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 0.86rem;
     justify-content: center;
+  }
+
+  .hero-proof {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .hero-proof--laptop {
+    display: block;
+    position: relative;
+  }
+
+  .hero-proof--laptop .proof-badge {
+    display: none !important;
+  }
+
+  .hero-proof--laptop::before {
+    content: "100% Job Success and Top Rated on Upwork";
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 9px 12px 9px 38px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #12313a;
+    font-size: 0.81rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .hero-proof--laptop::after {
+    content: "★";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f8f34, #14a800);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    pointer-events: none;
+  }
+
+  .hero-proof--right {
+    display: none !important;
+  }
+
+  .hero-proof .proof-badge {
+    min-width: 0;
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.81rem;
+    padding: 8px 8px;
+    overflow: hidden;
+  }
+
+  .hero-proof .badge-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+
+  .hero-proof .proof-badge span {
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   main {
@@ -1521,12 +1832,15 @@ footer {
 
   .footer-links {
     width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .footer-btn {
-    min-width: 130px;
+    min-width: 0;
+    padding: 9px 8px;
+    font-size: 0.8rem;
     justify-content: center;
   }
 }
@@ -1547,6 +1861,7 @@ footer {
   }
 
   .hero-editorial {
+    width: auto;
     margin-left: 12px;
     margin-right: 12px;
     padding: 24px 14px;
@@ -1555,6 +1870,21 @@ footer {
 
   .hero-left h1 {
     font-size: clamp(1.55rem, 3vw, 1.9rem);
+    max-width: none;
+  }
+
+  .hero-inline-photo {
+    float: right;
+    width: min(36vw, 128px);
+    margin: 10px 0 10px 10px;
+    border-radius: 50%;
+    shape-outside: circle(50%);
+    clip-path: circle(50%);
+  }
+
+  .hero-inline-photo img {
+    transform: scale(1.34);
+    transform-origin: center 36%;
   }
 
   .hero-metrics div {
@@ -1562,10 +1892,39 @@ footer {
     font-size: 0.85rem;
   }
 
+  .cta {
+    padding: 11px 10px;
+    font-size: 0.9rem;
+  }
+
   .hero-contact-btn {
-    flex: 1 1 calc(50% - 4px);
-    padding: 11px 12px;
-    font-size: 0.85rem;
+    padding: 9px 8px;
+    font-size: 0.8rem;
+  }
+
+  .hero-proof .proof-badge {
+    font-size: 0.75rem;
+    padding: 7px 6px;
+  }
+
+  .hero-proof--laptop::before {
+    content: "100% Job Success and\A Top Rated on Upwork";
+    white-space: pre-line;
+    font-size: 0.75rem;
+    padding: 8px 10px 8px 34px;
+  }
+
+  .hero-proof--laptop::after {
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+  }
+
+  .hero-proof .badge-icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
 
   main {
@@ -1658,9 +2017,9 @@ footer {
   }
 
   .footer-btn {
-    font-size: 0.9rem;
-    padding: 9px 12px;
-    min-width: 120px;
+    min-width: 0;
+    font-size: 0.74rem;
+    padding: 8px 6px;
   }
 }
 
