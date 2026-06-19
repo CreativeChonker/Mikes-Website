@@ -119,6 +119,29 @@ body::before {
   border: 1px solid rgba(22, 163, 74, 0.25);
 }
 
+.portfolio-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #10343e;
+  border: 1px solid rgba(21, 32, 33, 0.2);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.portfolio-switch-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(21, 32, 33, 0.12);
+  background: #ffffff;
+}
+
 /* HERO */
 .hero-editorial {
   width: min(1200px, calc(100% - 40px));
@@ -317,7 +340,14 @@ body::before {
 }
 
 .hero-proof--laptop {
-  display: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.hero-proof--right {
+  display: none !important;
 }
 
 .hero-contact-label {
@@ -416,18 +446,18 @@ body::before {
 }
 
 .orbit-a {
-  width: 70%;
+  width: 56%;
   aspect-ratio: 1;
-  left: -10%;
-  top: -14%;
+  left: -5%;
+  top: -8%;
   animation: spinOrbit 16s linear infinite;
 }
 
 .orbit-b {
-  width: 64%;
+  width: 50%;
   aspect-ratio: 1;
-  right: -18%;
-  bottom: -8%;
+  right: -10%;
+  bottom: -4%;
   animation: spinOrbit 13s linear infinite reverse;
 }
 
@@ -459,6 +489,30 @@ main {
   margin-top: 8px;
   font-family: "Fraunces", serif;
   font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+}
+
+.section-actions {
+  margin-top: 14px;
+}
+
+.graphic-design-section {
+  display: grid;
+  gap: 28px;
+}
+
+.graphic-design-section > .section-intro .section-kicker {
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+}
+
+.art-group {
+  display: grid;
+  gap: 12px;
+}
+
+.art-group-title {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
 }
 
 .hire-strip {
@@ -671,6 +725,10 @@ main {
 .digital-gallery .pixel-item.span-4 img {
   object-fit: contain;
   background: #111a1b;
+}
+
+.art-gallery .pixel-item img {
+  image-rendering: auto;
 }
 
 /* ── Card Grid ── */
@@ -1546,6 +1604,11 @@ footer {
     padding: 7px 9px;
   }
 
+  .portfolio-switch-btn {
+    font-size: 0.64rem;
+    padding: 7px 10px;
+  }
+
   .brand-rotator {
     flex-wrap: wrap;
     row-gap: 4px;
@@ -1854,6 +1917,12 @@ footer {
   .availability-pill {
     font-size: 0.62rem;
     letter-spacing: 0.07em;
+  }
+
+  .portfolio-switch-btn {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    padding: 6px 9px;
   }
 
   .brand-rotator {
