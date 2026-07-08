@@ -51,7 +51,7 @@ const drawerActions = document.querySelector("#drawerActions");
 const statusClasses = { done: "status-done", wip: "status-wip", live: "status-live" };
 
 function openDrawer(card) {
-  const { title, tag, status, statusLabel, desc, skills, imgs, url } = card.dataset;
+  const { title, tag, status, statusLabel, desc, skills, imgs, url, actionLabel } = card.dataset;
 
   drawerTitle.textContent = title;
   drawerTag.textContent   = tag;
@@ -136,8 +136,9 @@ function openDrawer(card) {
   // Actions
   drawerActions.innerHTML = "";
   if (url) {
+    const ctaLabel = actionLabel || "View Live Site";
     drawerActions.innerHTML = `<a href="${url}" target="_blank" rel="noopener" class="project-link">
-      View Live Site
+      ${ctaLabel}
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>`;
   }
@@ -153,7 +154,7 @@ function closeDrawer() {
   document.body.style.overflow = "";
 }
 
-document.querySelectorAll(".project-card").forEach(card => {
+document.querySelectorAll(".project-card, .cert-card").forEach(card => {
   if (!card.dataset.title) return;
   card.addEventListener("click", () => openDrawer(card));
   card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openDrawer(card); });
@@ -171,3 +172,166 @@ document.addEventListener("contextmenu", e => {
 document.addEventListener("dragstart", e => {
   if (e.target.tagName === "IMG") e.preventDefault();
 });
+
+// Left rail TOC active state
+const tocLinks = Array.from(document.querySelectorAll(".toc-rail-link"));
+if (tocLinks.length) {
+  const setActiveToc = (targetId) => {
+    tocLinks.forEach(link => {
+      link.classList.toggle("active", link.dataset.target === targetId);
+    });
+  };
+
+  tocLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      setActiveToc(link.dataset.target);
+    });
+  });
+
+  const sectionIds = ["skills", "portfolio", "certifications"];
+  const observedSections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if (observedSections.length) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) {
+        setActiveToc(visible.target.id);
+      } else if (window.scrollY < 120) {
+        setActiveToc("top");
+      }
+    }, {
+      root: null,
+      rootMargin: "-35% 0px -45% 0px",
+      threshold: [0.15, 0.35, 0.6],
+    });
+
+    observedSections.forEach(section => observer.observe(section));
+  }
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY < 120) {
+      setActiveToc("top");
+    }
+  }, { passive: true });
+}
+
+// Draggable TOC rail (keeps links clickable)
+const tocRail = document.querySelector(".toc-rail");
+if (tocRail) {
+  const railStorageKey = "tocRailPosition";
+  let dragging = false;
+  let activePointerId = null;
+  let pointerOffsetX = 0;
+  let pointerOffsetY = 0;
+  let usingCustomPosition = false;
+
+  const clampToViewport = (left, top) => {
+    const rect = tocRail.getBoundingClientRect();
+    const margin = 8;
+    const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
+    const maxTop = Math.max(margin, window.innerHeight - rect.height - margin);
+
+    return {
+      left: Math.min(Math.max(left, margin), maxLeft),
+      top: Math.min(Math.max(top, margin), maxTop),
+    };
+  };
+
+  const applyPosition = (left, top) => {
+    tocRail.style.left = `${left}px`;
+    tocRail.style.top = `${top}px`;
+    tocRail.style.transform = "none";
+  };
+
+  const savePosition = (left, top) => {
+    try {
+      localStorage.setItem(railStorageKey, JSON.stringify({ left, top }));
+    } catch {
+      // Ignore storage failures silently.
+    }
+  };
+
+  const readSavedPosition = () => {
+    try {
+      const raw = localStorage.getItem(railStorageKey);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (typeof parsed.left !== "number" || typeof parsed.top !== "number") return null;
+      return parsed;
+    } catch {
+      return null;
+    }
+  };
+
+  const saved = readSavedPosition();
+  if (saved) {
+    const clamped = clampToViewport(saved.left, saved.top);
+    applyPosition(clamped.left, clamped.top);
+    usingCustomPosition = true;
+  }
+
+  const startDrag = (event) => {
+    if (event.button !== 0) return;
+    if (event.target.closest(".toc-rail-link")) return;
+
+    const rect = tocRail.getBoundingClientRect();
+
+    if (!usingCustomPosition) {
+      applyPosition(rect.left, rect.top);
+      usingCustomPosition = true;
+    }
+
+    dragging = true;
+    activePointerId = event.pointerId;
+    pointerOffsetX = event.clientX - rect.left;
+    pointerOffsetY = event.clientY - rect.top;
+
+    tocRail.classList.add("dragging");
+    tocRail.setPointerCapture(activePointerId);
+  };
+
+  const onDrag = (event) => {
+    if (!dragging || event.pointerId !== activePointerId) return;
+
+    const rawLeft = event.clientX - pointerOffsetX;
+    const rawTop = event.clientY - pointerOffsetY;
+    const clamped = clampToViewport(rawLeft, rawTop);
+    applyPosition(clamped.left, clamped.top);
+  };
+
+  const endDrag = (event) => {
+    if (!dragging || event.pointerId !== activePointerId) return;
+
+    dragging = false;
+    tocRail.classList.remove("dragging");
+    tocRail.releasePointerCapture(activePointerId);
+    activePointerId = null;
+
+    const rect = tocRail.getBoundingClientRect();
+    savePosition(rect.left, rect.top);
+
+    tocRail.classList.remove("dropped");
+    window.requestAnimationFrame(() => {
+      tocRail.classList.add("dropped");
+      window.setTimeout(() => tocRail.classList.remove("dropped"), 520);
+    });
+  };
+
+  tocRail.addEventListener("pointerdown", startDrag);
+  window.addEventListener("pointermove", onDrag);
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
+
+  window.addEventListener("resize", () => {
+    if (!usingCustomPosition) return;
+    const rect = tocRail.getBoundingClientRect();
+    const clamped = clampToViewport(rect.left, rect.top);
+    applyPosition(clamped.left, clamped.top);
+    savePosition(clamped.left, clamped.top);
+  });
+}
