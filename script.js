@@ -188,7 +188,7 @@ if (tocLinks.length) {
     });
   });
 
-  const sectionIds = ["skills", "portfolio", "certifications"];
+  const sectionIds = ["skills", "sites", "automations", "certifications"];
   const observedSections = sectionIds
     .map(id => document.getElementById(id))
     .filter(Boolean);

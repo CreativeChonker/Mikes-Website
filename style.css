@@ -607,6 +607,20 @@ main {
   margin-top: 14px;
 }
 
+.project-subsection + .project-subsection {
+  margin-top: 36px;
+}
+
+.project-subsection-header {
+  margin-bottom: 14px;
+}
+
+.project-subsection-header h4 {
+  margin-top: 8px;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+}
+
 .graphic-design-section {
   display: grid;
   gap: 28px;

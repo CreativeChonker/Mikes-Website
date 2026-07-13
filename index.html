@@ -35,8 +35,9 @@
   <nav class="toc-links" aria-label="Table of contents">
     <a class="toc-rail-link active" href="#top" data-target="top">Overview</a>
     <a class="toc-rail-link" href="#skills" data-target="skills">Skills</a>
-    <a class="toc-rail-link" href="#portfolio" data-target="portfolio">Projects</a>
-    <a class="toc-rail-link" href="#certifications" data-target="certifications">Certification</a>
+    <a class="toc-rail-link" href="#sites" data-target="sites">Sites</a>
+    <a class="toc-rail-link" href="#automations" data-target="automations">Automations</a>
+    <a class="toc-rail-link" href="#certifications" data-target="certifications">Certifications</a>
   </nav>
 </aside>
 
@@ -214,12 +215,18 @@
   <section id="portfolio" class="content-section">
     <div class="section-intro">
       <p class="section-kicker">Selected work</p>
-      <h3>Sites I've built</h3>
+      <h3>Projects</h3>
       <div class="section-actions">
         <a href="graphic-design.html" class="cta ghost">View Graphic Design Gallery</a>
       </div>
     </div>
-    <div class="card-grid">
+
+    <div id="sites" class="project-subsection" aria-labelledby="sites-heading">
+      <div class="project-subsection-header">
+        <p class="section-kicker">Web development</p>
+        <h4 id="sites-heading">Sites</h4>
+      </div>
+      <div class="card-grid">
 
       <article class="project-card project-card--featured" role="button" tabindex="0"
         data-title="Photon"
@@ -393,6 +400,52 @@
         </div>
       </article>
 
+      </div>
+    </div>
+
+    <div id="automations" class="project-subsection" aria-labelledby="automations-heading">
+      <div class="project-subsection-header">
+        <p class="section-kicker">Workflow automation</p>
+        <h4 id="automations-heading">Automations (n8n)</h4>
+      </div>
+
+      <div class="card-grid">
+        <article class="project-card" role="button" tabindex="0"
+          data-title="AI Customer Support Triage System"
+          data-tag="n8n Automation"
+          data-status="done"
+          data-status-label="Completed"
+          data-desc="Built an n8n automation flow that triages inbound customer support requests and routes each case to the correct queue based on intent, urgency, and context. The workflow is designed to reduce manual sorting, improve first-response time, and keep support operations consistent as ticket volume grows."
+          data-skills="n8n,Workflow Automation,Customer Support,Routing Logic,Process Design"
+          data-imgs="assets/portfolio/automations/ai-customer-support-triage-system.jpg">
+          <div class="project-thumb">
+            <img src="assets/portfolio/automations/ai-customer-support-triage-system.jpg" alt="AI Customer Support Triage System n8n workflow preview" />
+          </div>
+          <div class="project-meta">
+            <span class="featured-chip">Featured Automation</span>
+            <div class="project-meta-top">
+              <p class="tag">n8n Automation</p>
+              <span class="project-status status-done">Completed</span>
+            </div>
+            <h4>AI Customer Support Triage System</h4>
+            <p>n8n workflow that triages customer support requests and routes tickets to the right queue using intent and urgency logic, reducing manual sorting and speeding up response time.</p>
+            <div class="project-skills">
+              <span>n8n</span><span>Automation</span><span>Support Ops</span><span>Routing</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card project-card--coming-soon" aria-label="More automations coming soon">
+          <div class="project-meta project-meta--coming-soon">
+            <span class="featured-chip">In Progress</span>
+            <h4>More Automations Soon</h4>
+            <p>More n8n workflow projects are being built and documented. New automation case studies will be added here next.</p>
+            <div class="project-skills">
+              <span>n8n Flows</span><span>AI Agents</span><span>Ops Automation</span>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
