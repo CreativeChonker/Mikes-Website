@@ -1,29 +1,3 @@
-const rotatorTrack = document.querySelector("#rotatorTrack");
-const rotatingWords = ["codes", "builds", "ships", "scales"];
-
-if (rotatorTrack) {
-  const loopWords = [...rotatingWords, rotatingWords[0]];
-  rotatorTrack.innerHTML = loopWords
-    .map(word => `<span class="rotator-word">${word}</span>`)
-    .join("");
-
-  let wordIndex = 0;
-
-  window.setInterval(() => {
-    wordIndex += 1;
-    rotatorTrack.style.transition = "transform 520ms cubic-bezier(0.22, 1, 0.36, 1)";
-    rotatorTrack.style.transform = `translateY(-${wordIndex * 1.2}em)`;
-
-    if (wordIndex === rotatingWords.length) {
-      window.setTimeout(() => {
-        rotatorTrack.style.transition = "none";
-        rotatorTrack.style.transform = "translateY(0)";
-        wordIndex = 0;
-      }, 560);
-    }
-  }, 2000);
-}
-
 // Back to top
 const backToTopBtn = document.querySelector("#backToTop");
 if (backToTopBtn) {
@@ -49,6 +23,9 @@ const drawerGallery = document.querySelector("#drawerGallery");
 const drawerActions = document.querySelector("#drawerActions");
 
 const statusClasses = { done: "status-done", wip: "status-wip", live: "status-live" };
+
+// Pages without a drawer (e.g. graphic-design.html) skip the whole block below.
+if (drawer) {
 
 function openDrawer(card) {
   const { title, tag, status, statusLabel, desc, skills, imgs, url, actionLabel } = card.dataset;
@@ -165,6 +142,8 @@ if (drawerOverlay) drawerOverlay.addEventListener("click", closeDrawer);
 drawer.addEventListener("click", e => { if (e.target === drawer) closeDrawer(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
 
+}
+
 // Block right-click and drag on all images
 document.addEventListener("contextmenu", e => {
   if (e.target.tagName === "IMG") e.preventDefault();
@@ -220,118 +199,30 @@ if (tocLinks.length) {
   }, { passive: true });
 }
 
-// Draggable TOC rail (keeps links clickable)
-const tocRail = document.querySelector(".toc-rail");
-if (tocRail) {
-  const railStorageKey = "tocRailPosition";
-  let dragging = false;
-  let activePointerId = null;
-  let pointerOffsetX = 0;
-  let pointerOffsetY = 0;
-  let usingCustomPosition = false;
+// Fade sections up as they enter the viewport
+const revealTargets = document.querySelectorAll(
+  ".section-head, .rule-item, .skill-group, .subsection-head, .project-card, .cert-card, .band-inner"
+);
 
-  const clampToViewport = (left, top) => {
-    const rect = tocRail.getBoundingClientRect();
-    const margin = 8;
-    const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
-    const maxTop = Math.max(margin, window.innerHeight - rect.height - margin);
+if (revealTargets.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  revealTargets.forEach(el => el.classList.add("reveal"));
 
-    return {
-      left: Math.min(Math.max(left, margin), maxLeft),
-      top: Math.min(Math.max(top, margin), maxTop),
-    };
-  };
-
-  const applyPosition = (left, top) => {
-    tocRail.style.left = `${left}px`;
-    tocRail.style.top = `${top}px`;
-    tocRail.style.transform = "none";
-  };
-
-  const savePosition = (left, top) => {
-    try {
-      localStorage.setItem(railStorageKey, JSON.stringify({ left, top }));
-    } catch {
-      // Ignore storage failures silently.
-    }
-  };
-
-  const readSavedPosition = () => {
-    try {
-      const raw = localStorage.getItem(railStorageKey);
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      if (typeof parsed.left !== "number" || typeof parsed.top !== "number") return null;
-      return parsed;
-    } catch {
-      return null;
-    }
-  };
-
-  const saved = readSavedPosition();
-  if (saved) {
-    const clamped = clampToViewport(saved.left, saved.top);
-    applyPosition(clamped.left, clamped.top);
-    usingCustomPosition = true;
-  }
-
-  const startDrag = (event) => {
-    if (event.button !== 0) return;
-    if (event.target.closest(".toc-rail-link")) return;
-
-    const rect = tocRail.getBoundingClientRect();
-
-    if (!usingCustomPosition) {
-      applyPosition(rect.left, rect.top);
-      usingCustomPosition = true;
-    }
-
-    dragging = true;
-    activePointerId = event.pointerId;
-    pointerOffsetX = event.clientX - rect.left;
-    pointerOffsetY = event.clientY - rect.top;
-
-    tocRail.classList.add("dragging");
-    tocRail.setPointerCapture(activePointerId);
-  };
-
-  const onDrag = (event) => {
-    if (!dragging || event.pointerId !== activePointerId) return;
-
-    const rawLeft = event.clientX - pointerOffsetX;
-    const rawTop = event.clientY - pointerOffsetY;
-    const clamped = clampToViewport(rawLeft, rawTop);
-    applyPosition(clamped.left, clamped.top);
-  };
-
-  const endDrag = (event) => {
-    if (!dragging || event.pointerId !== activePointerId) return;
-
-    dragging = false;
-    tocRail.classList.remove("dragging");
-    tocRail.releasePointerCapture(activePointerId);
-    activePointerId = null;
-
-    const rect = tocRail.getBoundingClientRect();
-    savePosition(rect.left, rect.top);
-
-    tocRail.classList.remove("dropped");
-    window.requestAnimationFrame(() => {
-      tocRail.classList.add("dropped");
-      window.setTimeout(() => tocRail.classList.remove("dropped"), 520);
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in");
+      revealObserver.unobserve(entry.target);
     });
-  };
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
 
-  tocRail.addEventListener("pointerdown", startDrag);
-  window.addEventListener("pointermove", onDrag);
-  window.addEventListener("pointerup", endDrag);
-  window.addEventListener("pointercancel", endDrag);
+  revealTargets.forEach(el => revealObserver.observe(el));
 
-  window.addEventListener("resize", () => {
-    if (!usingCustomPosition) return;
-    const rect = tocRail.getBoundingClientRect();
-    const clamped = clampToViewport(rect.left, rect.top);
-    applyPosition(clamped.left, clamped.top);
-    savePosition(clamped.left, clamped.top);
-  });
+  // Safety net: content must never stay invisible. If the observer has not
+  // fired by the time the page settles (backgrounded tab, blocked callback),
+  // drop the hidden state entirely.
+  window.setTimeout(() => {
+    if (document.querySelector(".reveal.in")) return;
+    revealObserver.disconnect();
+    revealTargets.forEach(el => el.classList.remove("reveal"));
+  }, 2000);
 }
