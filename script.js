@@ -27,6 +27,78 @@ const statusClasses = { done: "status-done", wip: "status-wip", live: "status-li
 // Pages without a drawer (e.g. graphic-design.html) skip the whole block below.
 if (drawer) {
 
+// ---------------------------------------------------------------------------
+// Lightbox — full-screen, uncropped view of the carousel images
+// ---------------------------------------------------------------------------
+
+let lightboxSources = [];
+let lightboxTitle = "";
+let lightboxIndex = 0;
+
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
+lightbox.setAttribute("role", "dialog");
+lightbox.setAttribute("aria-modal", "true");
+lightbox.setAttribute("aria-label", "Image viewer");
+lightbox.innerHTML = `
+  <button class="lightbox-close" type="button" aria-label="Close full screen">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <button class="lightbox-nav prev" type="button" aria-label="Previous image">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <figure class="lightbox-stage"><img alt="" /></figure>
+  <button class="lightbox-nav next" type="button" aria-label="Next image">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <p class="lightbox-counter"></p>
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg     = lightbox.querySelector("img");
+const lightboxCounter = lightbox.querySelector(".lightbox-counter");
+const lightboxPrev    = lightbox.querySelector(".lightbox-nav.prev");
+const lightboxNext    = lightbox.querySelector(".lightbox-nav.next");
+
+const lightboxIsOpen = () => lightbox.classList.contains("open");
+
+function renderLightbox(idx) {
+  const total = lightboxSources.length;
+  lightboxIndex = (idx + total) % total;
+  lightboxImg.src = lightboxSources[lightboxIndex];
+  lightboxImg.alt = `${lightboxTitle} screenshot ${lightboxIndex + 1}`;
+  lightboxCounter.textContent = `${lightboxIndex + 1} / ${total}`;
+  const many = total > 1;
+  lightboxCounter.style.display = many ? "" : "none";
+  lightboxPrev.style.display = many ? "" : "none";
+  lightboxNext.style.display = many ? "" : "none";
+}
+
+function openLightbox(idx) {
+  if (!lightboxSources.length) return;
+  renderLightbox(idx);
+  lightbox.classList.add("open");
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+}
+
+lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+lightboxPrev.addEventListener("click", (e) => { e.stopPropagation(); renderLightbox(lightboxIndex - 1); });
+lightboxNext.addEventListener("click", (e) => { e.stopPropagation(); renderLightbox(lightboxIndex + 1); });
+
+// Click the backdrop to dismiss, but not the image itself.
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox || e.target.classList.contains("lightbox-stage")) closeLightbox();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (!lightboxIsOpen()) return;
+  if (e.key === "ArrowLeft")  renderLightbox(lightboxIndex - 1);
+  if (e.key === "ArrowRight") renderLightbox(lightboxIndex + 1);
+});
+
 function openDrawer(card) {
   const { title, tag, status, statusLabel, desc, skills, imgs, url, actionLabel } = card.dataset;
 
@@ -65,6 +137,23 @@ function openDrawer(card) {
     });
 
     drawerGallery.appendChild(track);
+
+    // The carousel crops to a fixed ratio, so full detail lives in the lightbox.
+    lightboxSources = imgList.map(s => s.trim());
+    lightboxTitle = title;
+
+    const btnExpand = document.createElement("button");
+    btnExpand.className = "drawer-expand-btn";
+    btnExpand.type = "button";
+    btnExpand.setAttribute("aria-label", "View full screen");
+    btnExpand.innerHTML = `<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 1.5H1.5V6M10 1.5h4.5V6M6 14.5H1.5V10M10 14.5h4.5V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Full screen</span>`;
+    btnExpand.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openLightbox(carouselIndex);
+    });
+    drawerGallery.appendChild(btnExpand);
+
+    track.addEventListener("click", () => openLightbox(carouselIndex));
 
     // Arrows (only if >1 image)
     if (imgList.length > 1) {
@@ -126,6 +215,7 @@ function openDrawer(card) {
 }
 
 function closeDrawer() {
+  closeLightbox();
   drawer.classList.remove("open");
   drawerOverlay.classList.remove("open");
   document.body.style.overflow = "";
@@ -140,7 +230,12 @@ document.querySelectorAll(".project-card, .cert-card").forEach(card => {
 if (drawerClose)   drawerClose.addEventListener("click", closeDrawer);
 if (drawerOverlay) drawerOverlay.addEventListener("click", closeDrawer);
 drawer.addEventListener("click", e => { if (e.target === drawer) closeDrawer(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer(); });
+// Escape peels one layer at a time: lightbox first, then the drawer.
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (lightboxIsOpen()) closeLightbox();
+  else closeDrawer();
+});
 
 }
 

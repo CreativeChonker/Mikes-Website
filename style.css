@@ -1205,6 +1205,35 @@ h4 {
   right: 12px;
 }
 
+.drawer-expand-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: rgba(17, 17, 17, 0.82);
+  color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--t);
+}
+
+.drawer-expand-btn:hover {
+  background: var(--accent);
+}
+
+.drawer-carousel-track {
+  cursor: zoom-in;
+}
+
 .drawer-carousel-dots {
   display: flex;
   justify-content: center;
@@ -1260,6 +1289,121 @@ h4 {
 
 .drawer-actions {
   margin-top: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Lightbox — sits above the drawer, shows the image uncropped
+   -------------------------------------------------------------------------- */
+
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 24px);
+  padding: clamp(48px, 7vh, 84px) clamp(12px, 4vw, 64px);
+  background: rgba(10, 10, 10, 0.94);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+#lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: zoom-out;
+}
+
+.lightbox-stage img {
+  max-width: 100%;
+  max-height: calc(100vh - clamp(96px, 14vh, 168px));
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--r-md);
+}
+
+.lightbox-close,
+.lightbox-nav {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color var(--t), background var(--t);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: clamp(12px, 2.5vh, 24px);
+  right: clamp(12px, 2.5vw, 28px);
+}
+
+.lightbox-counter {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(14px, 3vh, 30px);
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+@media (max-width: 780px) {
+  #lightbox {
+    padding: 60px 10px 56px;
+    gap: 0;
+  }
+
+  /* Float the arrows over the image so it gets the full width instead of
+     sharing the row with two buttons. */
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    background: rgba(17, 17, 17, 0.6);
+  }
+
+  .lightbox-nav.prev {
+    left: 8px;
+  }
+
+  .lightbox-nav.next {
+    right: 8px;
+  }
+
+  .lightbox-close {
+    width: 38px;
+    height: 38px;
+  }
+
+  .lightbox-stage img {
+    max-height: calc(100vh - 116px);
+  }
 }
 
 /* --------------------------------------------------------------------------
