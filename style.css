@@ -24,12 +24,65 @@ html {
   --paper-2: #f5f5f5;
   --accent: #d97757;
 
+  /* The anchor bands stay dark in both themes, so they need their own tokens
+     rather than borrowing --ink, which inverts. */
+  --band-bg: #111111;
+  --band-fg: #ffffff;
+  --band-fg-2: rgba(255, 255, 255, 0.62);
+  --band-fg-3: rgba(255, 255, 255, 0.38);
+  --band-line: rgba(255, 255, 255, 0.14);
+
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --overlay: rgba(17, 17, 17, 0.5);
+
   --r-sm: 2px;
   --r-md: 4px;
 
   --pad-x: clamp(20px, 5vw, 88px);
   --shell: 1320px;
   --t: 120ms ease;
+}
+
+/* Dark theme. Applied by [data-theme] when the visitor has chosen, or by the
+   system preference when they have not. Keep the two blocks in sync. */
+:root[data-theme="dark"] {
+  --ink: #ededed;
+  --ink-2: #a3a3a3;
+  --ink-3: #8a8a8a;
+  --line: #2b2b2b;
+  --paper: #121212;
+  --paper-2: #1a1a1a;
+  --accent: #e08a6b;
+
+  --band-bg: #000000;
+  --band-fg: #ffffff;
+  --band-fg-2: rgba(255, 255, 255, 0.6);
+  --band-fg-3: rgba(255, 255, 255, 0.4);
+  --band-line: rgba(255, 255, 255, 0.12);
+
+  --nav-bg: rgba(18, 18, 18, 0.92);
+  --overlay: rgba(0, 0, 0, 0.62);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #ededed;
+    --ink-2: #a3a3a3;
+    --ink-3: #8a8a8a;
+    --line: #2b2b2b;
+    --paper: #121212;
+    --paper-2: #1a1a1a;
+    --accent: #e08a6b;
+
+    --band-bg: #000000;
+    --band-fg: #ffffff;
+    --band-fg-2: rgba(255, 255, 255, 0.6);
+    --band-fg-3: rgba(255, 255, 255, 0.4);
+    --band-line: rgba(255, 255, 255, 0.12);
+
+    --nav-bg: rgba(18, 18, 18, 0.92);
+    --overlay: rgba(0, 0, 0, 0.62);
+  }
 }
 
 body {
@@ -90,7 +143,7 @@ h4 {
 }
 
 .kicker--invert {
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--band-fg-2);
 }
 
 .btn {
@@ -139,7 +192,7 @@ h4 {
   gap: 24px;
   padding: 0 var(--pad-x);
   height: 68px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -151,7 +204,7 @@ h4 {
 }
 
 .wordmark--invert {
-  color: #fff;
+  color: var(--band-fg);
 }
 
 .nav-links {
@@ -930,8 +983,8 @@ h4 {
    -------------------------------------------------------------------------- */
 
 .band {
-  background: var(--ink);
-  color: #fff;
+  background: var(--band-bg);
+  color: var(--band-fg);
   padding: clamp(84px, 14vh, 160px) var(--pad-x);
 }
 
@@ -951,7 +1004,7 @@ h4 {
   max-width: 48ch;
   margin-top: 22px;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--band-fg-2);
 }
 
 .band-actions {
@@ -965,20 +1018,20 @@ h4 {
 .band-email {
   font-size: clamp(1rem, 1.8vw, 1.35rem);
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.78);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  color: var(--band-fg-2);
+  border-bottom: 1px solid var(--band-line);
   padding-bottom: 3px;
   transition: color var(--t), border-color var(--t);
 }
 
 .band-email:hover {
-  color: #fff;
+  color: var(--band-fg);
   border-bottom-color: var(--accent);
 }
 
 #footer {
-  background: var(--ink);
-  color: #fff;
+  background: var(--band-bg);
+  color: var(--band-fg);
   padding: 0 var(--pad-x) 26px;
 }
 
@@ -989,13 +1042,13 @@ h4 {
   max-width: var(--shell);
   margin: 0 auto;
   padding: 48px 0 40px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid var(--band-line);
 }
 
 .footer-brand p {
   margin-top: 12px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--band-fg-2);
   max-width: 34ch;
 }
 
@@ -1005,7 +1058,7 @@ h4 {
   flex-direction: column;
   gap: 11px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--band-fg-2);
 }
 
 .footer-nav a,
@@ -1026,10 +1079,10 @@ h4 {
   max-width: var(--shell);
   margin: 0 auto;
   padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-top: 1px solid var(--band-line);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.38);
+  color: var(--band-fg-3);
 }
 
 /* --------------------------------------------------------------------------
@@ -1079,7 +1132,7 @@ h4 {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(17, 17, 17, 0.5);
+  background: var(--overlay);
   backdrop-filter: blur(2px);
   opacity: 0;
   visibility: hidden;
@@ -1186,7 +1239,7 @@ h4 {
   place-items: center;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--paper);
   color: var(--ink);
   cursor: pointer;
   transition: border-color var(--t), color var(--t);
@@ -1404,6 +1457,102 @@ h4 {
   .lightbox-stage img {
     max-height: calc(100vh - 116px);
   }
+}
+
+/* --------------------------------------------------------------------------
+   Theme toggle
+   -------------------------------------------------------------------------- */
+
+/* Applied by the toggle for the length of the switch only. Without it the
+   whole page changes luminance in a single frame, which reads as a flash.
+   Scoped to colour properties so nothing else animates, and removed straight
+   after so page load and normal hovers stay instant. */
+:root.theme-transition,
+:root.theme-transition *,
+:root.theme-transition *::before,
+:root.theme-transition *::after {
+  transition: background-color 320ms ease,
+              color 320ms ease,
+              border-color 320ms ease,
+              fill 320ms ease,
+              stroke 320ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.theme-transition,
+  :root.theme-transition *,
+  :root.theme-transition *::before,
+  :root.theme-transition *::after {
+    transition: none !important;
+  }
+}
+
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: color var(--t), border-color var(--t);
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Show the icon for the theme you would switch TO, not the current one. */
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Dark-theme component fixes
+   -------------------------------------------------------------------------- */
+
+/* Several devicon logos are solid black, so they vanish against a dark panel.
+   A light tile keeps every logo legible in both states. */
+:root[data-theme="dark"] .skill-list img {
+  background: #f2f2f2;
+  padding: 2px;
+  border-radius: 2px;
+  box-sizing: content-box;
+}
+
+:root[data-theme="dark"] .btn-primary:hover,
+:root[data-theme="dark"] .nav-cta:hover {
+  background: #eda488;
+}
+
+/* Screenshots are bright white panels; take the glare off slightly until the
+   card is hovered. */
+:root[data-theme="dark"] .project-thumb img,
+:root[data-theme="dark"] .cert-image {
+  filter: brightness(0.92);
+}
+
+:root[data-theme="dark"] .project-card:hover .project-thumb img,
+:root[data-theme="dark"] .project-card:focus-visible .project-thumb img,
+:root[data-theme="dark"] .cert-card:hover .cert-image,
+:root[data-theme="dark"] .cert-card:focus-visible .cert-image {
+  filter: none;
+}
+
+:root[data-theme="dark"] .hero-right img {
+  filter: grayscale(1) contrast(1.02) brightness(0.9);
 }
 
 /* --------------------------------------------------------------------------

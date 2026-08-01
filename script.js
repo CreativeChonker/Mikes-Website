@@ -1,3 +1,42 @@
+// Theme toggle — the initial value is set by the inline script in <head> so
+// the page never paints in the wrong theme first.
+const themeToggle = document.querySelector("#themeToggle");
+if (themeToggle) {
+  const root = document.documentElement;
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  let transitionTimer = null;
+
+  themeToggle.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+    // Crossfade the colour change instead of swapping it in one frame.
+    root.classList.add("theme-transition");
+    window.clearTimeout(transitionTimer);
+    transitionTimer = window.setTimeout(() => {
+      root.classList.remove("theme-transition");
+    }, 340);
+
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Private browsing can refuse storage; the toggle still works per-page.
+    }
+  });
+
+  // Follow the OS only while the visitor has not picked a theme themselves.
+  systemDark.addEventListener("change", (e) => {
+    let chosen = null;
+    try {
+      chosen = localStorage.getItem("theme");
+    } catch {
+      chosen = null;
+    }
+    if (!chosen) root.setAttribute("data-theme", e.matches ? "dark" : "light");
+  });
+}
+
 // Back to top
 const backToTopBtn = document.querySelector("#backToTop");
 if (backToTopBtn) {
