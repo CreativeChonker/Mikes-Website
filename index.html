@@ -223,7 +223,7 @@
         data-status-label="Coming Soon • iOS &amp; Android"
         data-url="https://sprout-one-sandy.vercel.app/"
         data-action-label="View Landing Page"
-        data-desc="Sprout is an offline plant-care reminder app for iOS and Android, built with React Native and Expo in TypeScript. It works out when each plant needs water, food or a bigger pot from the season, the pot and the light, so the schedule adapts instead of nagging on a fixed timer. A built-in Plantopedia covers 223 species with Latin names, difficulty, light needs and pet-safety flagged plainly, and anything not listed can be added with its own rhythm. The whole app runs on-device with local notifications and a SQLite store, so there is no backend and no account to create."
+        data-desc="Sprout is an offline plant-care reminder app for iOS and Android, built with React Native and Expo in TypeScript. It works out when each plant needs water, food or a bigger pot from the season, the pot and the light, so every schedule adapts to the plant in front of you. A built-in Plantopedia covers 223 species with Latin names, difficulty, light needs and pet-safety flagged plainly, and you can add your own plants with a rhythm you set yourself. The whole app runs on-device with local notifications and a SQLite store, so it works offline and opens straight to your plants."
         data-skills="React Native,Expo,TypeScript,SQLite,Local Notifications,Mobile UI/UX,iOS &amp; Android"
         data-imgs="assets/portfolio/sprout/1.jpg,assets/portfolio/sprout/2.jpg,assets/portfolio/sprout/3.jpg,assets/portfolio/sprout/4.jpg,assets/portfolio/sprout/5.jpg,assets/portfolio/sprout/6.jpg">
         <div class="project-thumb">
@@ -285,7 +285,7 @@
         data-status="live"
         data-status-label="Live"
         data-url="https://cup-of-tea-eta.vercel.app/"
-        data-desc="Cup of Tea is a browser-based social deduction game for 4 to 12 players, built for groups already talking over Discord. A host opens a table with a four-letter code, roles are dealt from a cast of ten, and play alternates between Night, where roles act in secret, and Day, where the table argues and votes. The interesting problem is that every player is looking at the same game state through a different lens: a Witch sees her coven, the Seer learns what the dead were, and ghosts see everything, so the server holds one truth and each client renders a filtered view of it. There is no API layer at all. React and TypeScript talk straight to Supabase, with Postgres holding game state and Realtime broadcasting every change, and actions apply optimistically before the round trip confirms them so a vote registers the instant you click it. I also built a WebRTC voice mesh with a Cloudflare TURN relay for NAT traversal, playtested it, and found it would not hold up past a handful of players, so I removed it completely rather than ship something unreliable. The CRT treatment on top, scanlines, phosphor mask, chromatic aberration and glitch, is pure CSS with no canvas or WebGL."
+        data-desc="Cup of Tea is a browser-based social deduction game for 4 to 12 players, built for groups already talking over Discord. A host opens a table with a four-letter code, roles are dealt from a cast of ten, and play alternates between Night, where roles act in secret, and Day, where the table argues and votes. Every player looks at the same game state through a different lens: a Witch sees her coven, the Seer learns what the dead were, and ghosts see everything, so the server holds one truth and each client renders its own filtered view. React and TypeScript talk directly to Supabase, with Postgres holding game state and Realtime broadcasting every change to every client as it happens. Actions apply optimistically ahead of the round trip, so a vote registers the instant you click it. The CRT treatment on top, scanlines, phosphor mask, chromatic aberration and glitch, is built entirely in CSS."
         data-skills="React,TypeScript,Vite,Supabase,PostgreSQL,Realtime Sync,Game Design,CSS Effects"
         data-imgs="assets/portfolio/cup-of-tea/1-lobby.jpg,assets/portfolio/cup-of-tea/2-title.jpg">
         <div class="project-thumb">
@@ -300,7 +300,7 @@
             </span>
           </div>
           <h4>Cup of Tea</h4>
-          <p>Social deduction party game for 4 to 12 players over voice call. Real-time state sync across every client with no API layer, and a CRT theme built entirely in CSS.</p>
+          <p>Social deduction party game for 4 to 12 players over voice call. Real-time state sync straight from Supabase to every client, with a CRT theme built entirely in CSS.</p>
           <div class="project-skills">
             <span>React</span><span>TypeScript</span><span>Supabase</span><span>Realtime</span>
           </div>
