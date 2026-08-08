@@ -280,6 +280,38 @@
       </article>
 
       <article class="project-card" role="button" tabindex="0"
+        data-title="Cup of Tea"
+        data-tag="Real-Time Multiplayer"
+        data-status="live"
+        data-status-label="Live"
+        data-url="https://cup-of-tea-eta.vercel.app/"
+        data-desc="Cup of Tea is a browser-based social deduction game for 4 to 12 players, built for groups already talking over Discord. A host opens a table with a four-letter code, roles are dealt from a cast of ten, and play alternates between Night, where roles act in secret, and Day, where the table argues and votes. The interesting problem is that every player is looking at the same game state through a different lens: a Witch sees her coven, the Seer learns what the dead were, and ghosts see everything, so the server holds one truth and each client renders a filtered view of it. There is no API layer at all. React and TypeScript talk straight to Supabase, with Postgres holding game state and Realtime broadcasting every change, and actions apply optimistically before the round trip confirms them so a vote registers the instant you click it. I also built a WebRTC voice mesh with a Cloudflare TURN relay for NAT traversal, playtested it, and found it would not hold up past a handful of players, so I removed it completely rather than ship something unreliable. The CRT treatment on top, scanlines, phosphor mask, chromatic aberration and glitch, is pure CSS with no canvas or WebGL."
+        data-skills="React,TypeScript,Vite,Supabase,PostgreSQL,Realtime Sync,Game Design,CSS Effects"
+        data-imgs="assets/portfolio/cup-of-tea/1-lobby.jpg,assets/portfolio/cup-of-tea/2-title.jpg">
+        <div class="project-thumb">
+          <img src="assets/portfolio/cup-of-tea/1-lobby.jpg" alt="Cup of Tea lobby with party code and role selection" />
+          <span class="project-flag">Featured</span>
+        </div>
+        <div class="project-meta">
+          <div class="project-meta-top">
+            <p class="tag">Real-Time Multiplayer</p>
+            <span class="project-status status-live">
+              <span class="live-dot"></span>Live
+            </span>
+          </div>
+          <h4>Cup of Tea</h4>
+          <p>Social deduction party game for 4 to 12 players over voice call. Real-time state sync across every client with no API layer, and a CRT theme built entirely in CSS.</p>
+          <div class="project-skills">
+            <span>React</span><span>TypeScript</span><span>Supabase</span><span>Realtime</span>
+          </div>
+          <a href="https://cup-of-tea-eta.vercel.app/" target="_blank" rel="noopener" class="project-link" onclick="event.stopPropagation()">
+            View site
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="project-card" role="button" tabindex="0"
         data-title="OCLawnMowers"
         data-tag="Business Website"
         data-status="live"
