@@ -621,72 +621,102 @@ h4 {
 }
 
 /* --------------------------------------------------------------------------
-   Skills
+   Experience — vertical timeline
    -------------------------------------------------------------------------- */
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
+.exp-list {
+  list-style: none;
   max-width: var(--shell);
   margin: 0 auto;
-  border-top: 1px solid var(--line);
 }
 
-.skill-group {
-  padding: 30px 34px 8px 0;
-  border-right: 1px solid var(--line);
+/* Each item draws its own marker and the line down to the next marker, so the
+   line always spans exactly first-to-last however many roles there are. */
+.exp-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(150px, 0.3fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 64px);
+  padding: 0 0 clamp(44px, 7vh, 72px) 64px;
 }
 
-.skill-group:last-child {
-  border-right: 0;
+.exp-item:last-child {
+  padding-bottom: 0;
 }
 
-.skill-group:not(:first-child) {
-  padding-left: 34px;
+.exp-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--paper);
 }
 
-.skill-group h3 {
-  font-size: 12px;
-  font-weight: 500;
+.section--tint .exp-item::before {
+  background: var(--paper-2);
+}
+
+.exp-item--current::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.exp-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 28px;
+  bottom: -2px;
+  width: 2px;
+  background: var(--ink-3);
+}
+
+.exp-date {
+  padding-top: 2px;
+  font-size: 11px;
+  line-height: 20px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 
-.skill-list {
+.exp-main h3 {
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  letter-spacing: -0.035em;
+}
+
+.exp-org {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.exp-points {
   list-style: none;
+  max-width: 72ch;
   margin-top: 18px;
 }
 
-.skill-list li {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 11px 0;
+.exp-points li {
+  position: relative;
+  padding: 0 0 12px 22px;
   font-size: 15px;
-  border-bottom: 1px solid var(--line);
-  transition: color var(--t);
+  color: var(--ink-2);
 }
 
-.skill-list li:last-child {
-  border-bottom: 0;
-}
-
-.skill-list img,
-.skill-list .skill-svg {
-  width: 16px;
-  height: 16px;
-  flex: none;
-  filter: grayscale(1);
-  opacity: 0.5;
-  transition: filter var(--t), opacity var(--t);
-}
-
-.skill-list li:hover img,
-.skill-list li:hover .skill-svg {
-  filter: none;
-  opacity: 1;
+.exp-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 10px;
+  height: 1px;
+  background: var(--ink-3);
 }
 
 /* --------------------------------------------------------------------------
@@ -890,23 +920,6 @@ h4 {
 .project-link:hover {
   color: var(--accent);
   border-bottom-color: var(--accent);
-}
-
-.project-card--soon {
-  cursor: default;
-  display: flex;
-  align-items: center;
-  border: 1px dashed var(--line);
-  border-radius: var(--r-md);
-  padding: 30px;
-}
-
-.project-card--soon .project-meta {
-  padding-top: 0;
-}
-
-.project-card--soon h4 {
-  border-bottom: 0;
 }
 
 /* --------------------------------------------------------------------------
@@ -1535,15 +1548,6 @@ h4 {
    Dark-theme component fixes
    -------------------------------------------------------------------------- */
 
-/* Several devicon logos are solid black, so they vanish against a dark panel.
-   A light tile keeps every logo legible in both states. */
-:root[data-theme="dark"] .skill-list img {
-  background: #f2f2f2;
-  padding: 2px;
-  border-radius: 2px;
-  box-sizing: content-box;
-}
-
 :root[data-theme="dark"] .btn-primary:hover,
 :root[data-theme="dark"] .nav-cta:hover {
   background: #eda488;
@@ -1725,21 +1729,24 @@ h4 {
     max-width: none;
   }
 
-  .rule-grid--3,
-  .skills-grid {
+  .rule-grid--3 {
     grid-template-columns: 1fr;
   }
 
-  .rule-item,
-  .skill-group {
+  .rule-item {
     padding: 24px 0;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
 
-  .rule-item:not(:first-child),
-  .skill-group:not(:first-child) {
+  .rule-item:not(:first-child) {
     padding-left: 0;
+  }
+
+  .exp-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-left: 44px;
   }
 
   .work-grid {

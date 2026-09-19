@@ -301,7 +301,7 @@ if (tocLinks.length) {
     });
   });
 
-  const sectionIds = ["skills", "sites", "automations", "certifications"];
+  const sectionIds = ["experience", "sites", "automations", "certifications"];
   const observedSections = sectionIds
     .map(id => document.getElementById(id))
     .filter(Boolean);
@@ -335,7 +335,7 @@ if (tocLinks.length) {
 
 // Fade sections up as they enter the viewport
 const revealTargets = document.querySelectorAll(
-  ".section-head, .rule-item, .skill-group, .subsection-head, .project-card, .cert-card, .band-inner"
+  ".section-head, .rule-item, .subsection-head, .project-card, .cert-card, .band-inner"
 );
 
 if (revealTargets.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
