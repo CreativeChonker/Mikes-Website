@@ -763,6 +763,18 @@ h4 {
   transition: transform 400ms ease;
 }
 
+/* Illustrated key art has its subject spread top to bottom, unlike UI
+   screenshots whose important content sits at the top. The 21:9 lead crop
+   shows only 57% of a 4:3 poster, which cuts off either the title or the
+   characters, so posters get a taller frame and a lower focal point. */
+.project-card.is-lead .project-thumb--poster {
+  aspect-ratio: 16 / 9;
+}
+
+.project-thumb--poster img {
+  object-position: center 60%;
+}
+
 .project-card:hover .project-thumb,
 .project-card:focus-visible .project-thumb {
   border-color: var(--accent);
